@@ -59,6 +59,7 @@ while True:
             match = re.search(r'\s*get\s+(\S+)',user_input,re.IGNORECASE)
             if match:
                 item = re.sub(r"^\s*get\s+","",user_input.rstrip(),re.IGNORECASE)
+                item = item.lower()
                 if 'items' in data[index].keys() and item in data[index]['items']:
                     print(f"You pick up the {item}.")
                     inventory.append(item)
