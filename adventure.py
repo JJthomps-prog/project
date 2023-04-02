@@ -31,6 +31,7 @@ while True:
     try:
         user_input = input("What would you like to do? ")
         if re.fullmatch(r'^quit$',user_input,re.IGNORECASE):
+            print('Goodbye!')
             break
         if re.fullmatch(r'^\s*go(\s*|\s+\w*)',user_input,re.IGNORECASE):
             match = re.search(r'\s*go\s+(\S+)',user_input,re.IGNORECASE)
