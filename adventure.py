@@ -5,24 +5,6 @@ filename = sys.argv[1]
 with open(filename, 'r') as file:
     data = json.load(file)
 temp = {}
-for room in data:
-    if 'name' not in room:
-        raise ValueError('Invalid map')
-    if 'desc' not in room:
-        raise ValueError('Invalid map')
-    if 'exits' not in room:
-        raise ValueError('Invalid map')
-    if isinstance(room['name'], str) == False:
-        raise ValueError('Invalid map')
-    if isinstance(room['desc'], str) == False:
-        raise ValueError('Invalid map')
-    for exit in room['exits']:
-        if exit not in temp:
-            temp[exit] = room['exits'][exit]
-        else:
-            if temp[exit] == room['exits'][exit]:
-                raise ValueError('Invalid map')
-        temp[exit] = room['exits'][exit]
 print(f"> {data[0]['name']}\n\n{data[0]['desc']}\n\nExits: {' '.join(list(data[0]['exits'].keys())).lower()}\n")
 index = 0
 inventory = []
