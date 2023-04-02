@@ -55,7 +55,7 @@ while True:
         if re.fullmatch(r'^quit$',user_input,re.IGNORECASE):
             print('Goodbye!')
             break
-        if re.match(r'^\s*go(\s*|\s+\w*)',user_input,re.IGNORECASE):
+        elif re.match(r'^\s*go(\s*|\s+\w*)',user_input,re.IGNORECASE):
             match = re.search(r'\s*go\s+(\S+)',user_input,re.IGNORECASE)
             if match:
                 direction = re.sub(r"^\s*go\s+","",user_input.rstrip(),re.IGNORECASE)
@@ -73,13 +73,13 @@ while True:
             else:
                 print(f"Sorry, you need to 'go' somewhere.")
 
-        if re.fullmatch(r'^\s*look$',user_input,re.IGNORECASE):
+        elif re.fullmatch(r'^\s*look$',user_input,re.IGNORECASE):
             if 'items' not in data[index].keys() or len(data[index]['items'])==0:
                 print(f"> {data[index]['name']}\n\n{data[index]['desc']}\n\nExits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
             else:
                 print(f"> {data[index]['name']}\n\n{data[index]['desc']}\n\nItems: {', '.join(data[index]['items']).lower()}\n\nExits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
 
-        if re.match(r'^\s*get(\s*|\s+\w*)',user_input,re.IGNORECASE):
+        elif re.match(r'^\s*get(\s*|\s+\w*)',user_input,re.IGNORECASE):
             match = re.search(r'\s*get\s+(\S+)',user_input,re.IGNORECASE)
             if match:
                 item = re.sub(r"^\s*get\s+","",user_input.rstrip(),re.IGNORECASE)
@@ -93,7 +93,7 @@ while True:
             else:
                 print(f"Sorry, you need to 'get' something.")
         
-        if re.fullmatch(r'^\s*inventory$',user_input,re.IGNORECASE):
+        elif re.fullmatch(r'^\s*inventory$',user_input,re.IGNORECASE):
             if(len(inventory)==0):
                 print(f"You're not carrying anything.")
             else:
@@ -101,7 +101,7 @@ while True:
                 for x in inventory:
                     print(f"  {x}")
         
-        if re.match(r'^\s*drop(\s*|\s+\w*)',user_input,re.IGNORECASE):
+        elif re.match(r'^\s*drop(\s*|\s+\w*)',user_input,re.IGNORECASE):
             match = re.search(r'\s*drop\s+(\S+)',user_input,re.IGNORECASE)
             if match:
                 item = re.sub(r"^\s*drop\s+","",user_input.rstrip(),re.IGNORECASE)
