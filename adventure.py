@@ -55,6 +55,10 @@ while True:
         if re.fullmatch(r'^quit$',user_input,re.IGNORECASE):
             print('Goodbye!')
             break
+
+        elif re.match(r'^\s*go\s+door3',user_input,re.IGNORECASE):
+            print('this is door3')
+
         elif re.match(r'^\s*go(\s*|\s+\w*)',user_input,re.IGNORECASE):
             match = re.search(r'\s*go\s+(\S+)',user_input,re.IGNORECASE)
             if match:
@@ -120,6 +124,10 @@ while True:
                     inventory.remove(item)
             else:
                 print(f"You need to drop 'something'.")
+
+        
+
+        
 
     except EOFError:
         print("\nUse 'quit' to exit.")
