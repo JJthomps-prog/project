@@ -38,12 +38,13 @@ while True:
                 direction = str(match.group(1)).lower()
                 if direction in list(data[index]['exits'].keys()):
                     index = data[index]['exits'][str(match.group(1)).lower()]
+                    print(f"You go {direction}.")
                     if 'items' not in data[index].keys() or len(data[index]['items'])==0:
                         print(f"> {data[index]['name']}\n\n {data[index]['desc']}\n\n Exits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
                     else:
                         print(f"> {data[index]['name']}\n\n {data[index]['desc']}\n\n Items: {' '.join(data[index]['items']).lower()}\n\n Exits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
                 else:
-                    print(f"There's no way to go {direction}")
+                    print(f"There's no way to go {direction}.")
             else:
                 print(f"Sorry, you need to 'go' somewhere.")
 
