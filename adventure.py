@@ -48,6 +48,7 @@ for room in data:
 print(f"> {data[0]['name']}\n\n{data[0]['desc']}\n\nExits: {' '.join(list(data[0]['exits'].keys())).lower()}\n")
 index = 0
 inventory = []
+door3lock = 0
 # go大小写还未区分，get只能一次捡一个东西
 while True:
     try:
@@ -57,7 +58,27 @@ while True:
             break
 
         elif re.match(r'^\s*go\s+door3',user_input,re.IGNORECASE):
-            print('this is door3')
+            if 'beer' not in inventory and 'weed' not in inventory and door3lock == 0:
+                print(f"'Bring me my bear and weed. I won't open the door if you don't have these two things.' A hoarse voice came, accompanied by the sound of a lighter lighting a cigarette.")
+            elif 'beer' in inventory and 'weed' not in inventory and door3lock == 0:
+                print(f"'Where's my weed. I need weed right now.' A sound came.")
+            elif 'beer' not in inventory and 'weed' in inventory and door3lock == 0:
+                print(f"'Where's my beer! You know I need my beer to stay sober.'A sound came.")
+            elif 'beer' in inventory and 'weed' in inventory and door3lock == 0:
+                print(f"'Come on in my friend! I've been waiting you for a long time.' Roommate opened the door with a simle.")
+                index = data[index]['exits']['door3']
+                print(f"You go door3.\n")
+                if 'items' not in data[index].keys() or len(data[index]['items'])==0:
+                    print(f"> {data[index]['name']}\n\n{data[index]['desc']}\n\nExits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
+                else:
+                    print(f"> {data[index]['name']}\n\n{data[index]['desc']}\n\nItems: {', '.join(data[index]['items']).lower()}\n\nExits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
+                door3lock = 1
+            elif door3lock == 1:
+                index = data[index]['exits']['door3']
+                if 'items' not in data[index].keys() or len(data[index]['items'])==0:
+                    print(f"> {data[index]['name']}\n\n{data[index]['desc']}\n\nExits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
+                else:
+                    print(f"> {data[index]['name']}\n\n{data[index]['desc']}\n\nItems: {', '.join(data[index]['items']).lower()}\n\nExits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
 
         elif re.match(r'^\s*go(\s*|\s+\w*)',user_input,re.IGNORECASE):
             match = re.search(r'\s*go\s+(\S+)',user_input,re.IGNORECASE)
