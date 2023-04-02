@@ -55,10 +55,11 @@ while True:
         if re.fullmatch(r'^quit$',user_input,re.IGNORECASE):
             print('Goodbye!')
             break
-        if re.fullmatch(r'^\s*go(\s*|\s+\w*)',user_input,re.IGNORECASE):
+        if re.match(r'^\s*go(\s*|\s+\w*)',user_input,re.IGNORECASE):
             match = re.search(r'\s*go\s+(\S+)',user_input,re.IGNORECASE)
             if match:
-                direction = str(match.group(1)).lower()
+                direction = re.sub(r"^\s*go\s+","",user_input.rstrip(),re.IGNORECASE)
+                direction = direction.lower()
                 exits = list(data[index]['exits'].keys())
                 if direction in list(data[index]['exits'].keys()):
                     index = data[index]['exits'][str(match.group(1)).lower()]
@@ -99,6 +100,26 @@ while True:
                 print(f"Inventory:")
                 for x in inventory:
                     print(f" {x}")
+        
+        if re.match(r'^\s*drop(\s*|\s+\w*)',user_input,re.IGNORECASE):
+            match = re.search(r'\s*drop\s+(\S+)',user_input,re.IGNORECASE)
+            if match:
+                item = re.sub(r"^\s*drop\s+","",user_input.rstrip(),re.IGNORECASE)
+                item = item.lower()
+                if(len(inventory)==0):
+                    print(f"You have nothing to drop.")
+                elif item not in inventory:
+                    print(f"There's no {item} to drop.")
+                else:
+                    print(f"You drop the {item}.")
+                    if 'items' not in data[index].keys():
+                        data[index]['items'] = []
+                        data[index]['items'].append(item)
+                    else:
+                        data[index]['items'].append(item)
+                    inventory.remove(item)
+            else:
+                print(f"You need to drop 'something'.")
 
     except EOFError:
         print("\nUse 'quit' to exit.")
