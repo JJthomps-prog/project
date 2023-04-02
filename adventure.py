@@ -77,5 +77,3 @@ while True:
 
     except EOFError:
         print("\nUse 'quit' to exit.")
-    except KeyboardInterrupt:
-        raise KeyboardInterrupt()
