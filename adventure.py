@@ -71,7 +71,8 @@ while True:
                 print(f"You're not carrying anything.")
             else:
                 print(f"Inventory:")
-                print('\n'.join(inventory).lower())
+                for x in inventory:
+                    print(f" {x}")
 
     except EOFError:
         print("\nUse 'quit' to exit.")
