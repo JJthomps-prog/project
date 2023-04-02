@@ -23,7 +23,7 @@ for room in data:
             if temp[exit] == room['exits'][exit]:
                 raise ValueError('Invalid map')
         temp[exit] = room['exits'][exit]
-print(f"> {data[0]['name']}\n\n {data[0]['desc']}\n\n Exits: {' '.join(list(data[0]['exits'].keys())).lower()}\n")
+print(f"> {data[0]['name']}\n\n{data[0]['desc']}\n\nExits: {' '.join(list(data[0]['exits'].keys())).lower()}\n")
 index = 0
 inventory = []
 # go大小写还未区分，get只能一次捡一个东西
@@ -38,11 +38,11 @@ while True:
                 direction = str(match.group(1)).lower()
                 if direction in list(data[index]['exits'].keys()):
                     index = data[index]['exits'][str(match.group(1)).lower()]
-                    print(f"You go {direction}.")
+                    print(f"You go {direction}.\n")
                     if 'items' not in data[index].keys() or len(data[index]['items'])==0:
-                        print(f"> {data[index]['name']}\n\n {data[index]['desc']}\n\n Exits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
+                        print(f"> {data[index]['name']}\n\n{data[index]['desc']}\n\nExits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
                     else:
-                        print(f"> {data[index]['name']}\n\n {data[index]['desc']}\n\n Items: {' '.join(data[index]['items']).lower()}\n\n Exits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
+                        print(f"> {data[index]['name']}\n\n{data[index]['desc']}\n\nItems: {', '.join(data[index]['items']).lower()}\n\nExits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
                 else:
                     print(f"There's no way to go {direction}.")
             else:
@@ -50,9 +50,9 @@ while True:
 
         if re.fullmatch(r'^\s*look$',user_input,re.IGNORECASE):
             if 'items' not in data[index].keys() or len(data[index]['items'])==0:
-                print(f"> {data[index]['name']}\n\n {data[index]['desc']}\n\n Exits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
+                print(f"> {data[index]['name']}\n\n{data[index]['desc']}\n\nExits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
             else:
-                print(f"> {data[index]['name']}\n\n {data[index]['desc']}\n\n Items: {' '.join(data[index]['items']).lower()}\n\n Exits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
+                print(f"> {data[index]['name']}\n\n{data[index]['desc']}\n\nItems: {', '.join(data[index]['items']).lower()}\n\nExits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
 
         if re.match(r'^\s*get(\s*|\s+\w*)',user_input,re.IGNORECASE):
             match = re.search(r'\s*get\s+(\S+)',user_input,re.IGNORECASE)
@@ -61,7 +61,7 @@ while True:
                 if 'items' in data[index].keys() and item in data[index]['items']:
                     inventory.append(item)
                 else:
-                    print(f"There's no {item} anywhere")
+                    print(f"There's no {item} anywhere.")
             else:
                 print(f"Sorry, you need to 'get' something.")
         
