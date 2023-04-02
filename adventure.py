@@ -59,6 +59,7 @@ while True:
             if match:
                 item = re.sub(r"^\s*get\s+","",user_input.rstrip(),re.IGNORECASE)
                 if 'items' in data[index].keys() and item in data[index]['items']:
+                    print(f"You pick up the {item}.")
                     inventory.append(item)
                 else:
                     print(f"There's no {item} anywhere.")
@@ -66,8 +67,11 @@ while True:
                 print(f"Sorry, you need to 'get' something.")
         
         if re.fullmatch(r'^\s*inventory$',user_input,re.IGNORECASE):
-            print(f"Inventory:")
-            print('\n'.join(inventory).lower())
+            if(len(inventory)==0):
+                print(f"You're not carrying anything.")
+            else:
+                print(f"Inventory:")
+                print('\n'.join(inventory).lower())
 
     except EOFError:
         print("\nUse 'quit' to exit.")
