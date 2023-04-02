@@ -99,7 +99,7 @@ while True:
             else:
                 print(f"Inventory:")
                 for x in inventory:
-                    print(f" {x}")
+                    print(f"  {x}")
         
         if re.match(r'^\s*drop(\s*|\s+\w*)',user_input,re.IGNORECASE):
             match = re.search(r'\s*drop\s+(\S+)',user_input,re.IGNORECASE)
