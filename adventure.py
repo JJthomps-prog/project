@@ -63,6 +63,7 @@ while True:
                 if 'items' in data[index].keys() and item in data[index]['items']:
                     print(f"You pick up the {item}.")
                     inventory.append(item)
+                    data[index]['items'].remove(item)
                 else:
                     print(f"There's no {item} anywhere.")
             else:
