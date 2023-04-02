@@ -16,13 +16,35 @@ for room in data:
         raise ValueError('Invalid map')
     if isinstance(room['desc'], str) == False:
         raise ValueError('Invalid map')
-    for exit in room['exits']:
-        if exit not in temp:
-            temp[exit] = room['exits'][exit]
-        else:
-            if temp[exit] == room['exits'][exit]:
-                raise ValueError('Invalid map')
-        temp[exit] = room['exits'][exit]
+    i = 0
+    for x in data:
+        for exit in x['exits']:
+            if exit == 'north':
+                if 'south' not in list(data[x['exits'][exit]]['exits'].keys()) or data[x['exits'][exit]]['exits']['south'] != i:
+                    raise ValueError('Invalid map')
+            elif exit == 'south':
+                if 'north' not in list(data[x['exits'][exit]]['exits'].keys()) or data[x['exits'][exit]]['exits']['north'] != i:
+                    raise ValueError('Invalid map')
+            elif exit == 'east':
+                if 'west' not in list(data[x['exits'][exit]]['exits'].keys()) or data[x['exits'][exit]]['exits']['west'] != i:
+                    raise ValueError('Invalid map')
+            elif exit == 'west':
+                if 'east' not in list(data[x['exits'][exit]]['exits'].keys()) or data[x['exits'][exit]]['exits']['east'] != i:
+                    raise ValueError('Invalid map')
+            elif exit == 'northwest':
+                if 'southeast' not in list(data[x['exits'][exit]]['exits'].keys()) or data[x['exits'][exit]]['exits']['southeast'] != i:
+                    raise ValueError('Invalid map')
+            elif exit == 'northeast':
+                if 'southwest' not in list(data[x['exits'][exit]]['exits'].keys()) or data[x['exits'][exit]]['exits']['southwest'] != i:
+                    raise ValueError('Invalid map')
+            elif exit == 'southwest':
+                if 'northeast' not in list(data[x['exits'][exit]]['exits'].keys()) or data[x['exits'][exit]]['exits']['northeast'] != i:
+                    raise ValueError('Invalid map')
+            elif exit == 'southeast':
+                if 'northwest' not in list(data[x['exits'][exit]]['exits'].keys()) or data[x['exits'][exit]]['exits']['northwest'] != i:
+                    raise ValueError('Invalid map')
+        i = i + 1
+
 print(f"> {data[0]['name']}\n\n{data[0]['desc']}\n\nExits: {' '.join(list(data[0]['exits'].keys())).lower()}\n")
 index = 0
 inventory = []
@@ -37,6 +59,7 @@ while True:
             match = re.search(r'\s*go\s+(\S+)',user_input,re.IGNORECASE)
             if match:
                 direction = str(match.group(1)).lower()
+                exits = list(data[index]['exits'].keys())
                 if direction in list(data[index]['exits'].keys()):
                     index = data[index]['exits'][str(match.group(1)).lower()]
                     print(f"You go {direction}.\n")
