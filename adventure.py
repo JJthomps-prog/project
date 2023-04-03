@@ -84,14 +84,15 @@ while True:
         elif data[index]['name'] == "Rocky's Roommate room" and re.match(r'^\s*go\s+door4',user_input,re.IGNORECASE) and Roommatekey == 0:
             if 'weed' in data[index]['items'] and 'beer' in data[index]['items']:
                 index = data[index]['exits']['door4']
-                print(f"'The keys are in the box. 'open box'.' Roommate shouts to you.\n")
+                print(f"'The keys are under the box.' Roommate shouts to you.\n")
                 print(f"You go door4.\n")
-                if 'box' not in data[4]['items']:
-                    data[4]['items'].append('box')
+                if 'roommate keys' not in data[4]['items']:
+                    data[4]['items'].append('roommate keys')
                 if 'items' not in data[index].keys() or len(data[index]['items'])==0:
                     print(f"> {data[index]['name']}\n\n{data[index]['desc']}\n\nExits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
                 else:
                     print(f"> {data[index]['name']}\n\n{data[index]['desc']}\n\nItems: {', '.join(data[index]['items']).lower()}\n\nExits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
+                Roommatekey = 1
             else:
                 print(f"Rocky's roommate shouts 'the key is in the bathroom, I won't tell you where unless you drop 'weed' and 'beer' in my bedroom.\n")
                 index = data[index]['exits']['door4']
@@ -101,11 +102,6 @@ while True:
                 else:
                     print(f"> {data[index]['name']}\n\n{data[index]['desc']}\n\nItems: {', '.join(data[index]['items']).lower()}\n\nExits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
 
-        elif data[index]['name'] == "Rocky's Roommate bathroom" and re.match(r'^\s*open\s+box',user_input,re.IGNORECASE) and 'box' in data[4]['items'] and Roommatekey == 0:
-            inventory.append('Roommate keys')
-            data[4]['items'].remove('box')
-            print("You finally get the keys!\n")
-            Roommatekey = 1
 
         elif data[index]['name'] == "Rocky's Living room" and re.match(r'^\s*go\s+door5',user_input,re.IGNORECASE):
             if(Roommatekey==1):
