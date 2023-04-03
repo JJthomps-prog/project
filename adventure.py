@@ -66,7 +66,7 @@ while True:
             elif 'beer' not in inventory and 'weed' in inventory and door3lock == 0:
                 print(f"'Where's my beer! You know I need my beer to stay sober.'A sound came.\n")
             elif 'beer' in inventory and 'weed' in inventory and door3lock == 0:
-                print(f"'Come on in my friend! I've been waiting you for a long time. Just drop it in the room.' Roommate opened the door with a simle.\n")
+                print(f"'Come on in my friend! I've been waiting you for a long time. Just drop it in the room.' Roommate opened the door with a smile.\n")
                 index = data[index]['exits']['door3']
                 print(f"You go door3.\n")
                 if 'items' not in data[index].keys() or len(data[index]['items'])==0:
@@ -93,7 +93,7 @@ while True:
                 else:
                     print(f"> {data[index]['name']}\n\n{data[index]['desc']}\n\nItems: {', '.join(data[index]['items']).lower()}\n\nExits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
             else:
-                print(f"Rocky's roommate shouts 'the key is in the bathroom, I won't tell you where unless you drop 'weed' and 'beer' in my room.\n")
+                print(f"Rocky's roommate shouts 'the key is in the bathroom, I won't tell you where unless you drop 'weed' and 'beer' in my bedroom.\n")
                 index = data[index]['exits']['door4']
                 print(f"You go door4.\n")
                 if 'items' not in data[index].keys() or len(data[index]['items'])==0:
@@ -106,6 +106,14 @@ while True:
             data[4]['items'].remove('box')
             print("You finally get the keys!\n")
             Roommatekey = 1
+
+        elif data[index]['name'] == "Rocky's Living room" and re.match(r'^\s*go\s+door5',user_input,re.IGNORECASE):
+            if(Roommatekey==1):
+                print(f"You get the keys! You won't be worried out coming back.\n")
+                break
+            elif(Roommatekey==0):
+                print(f"You get out and forget the keys. After a long time, you come back and find you don't have the keys. You become homeless.\n")
+                break
         
         elif re.match(r'^\s*go(\s*|\s+\w*)',user_input,re.IGNORECASE):
             match = re.search(r'\s*go\s+(\S+)',user_input,re.IGNORECASE)
