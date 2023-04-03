@@ -25,7 +25,7 @@ python3 adventure.py loop.map
 with error in other map
 You need to specify the room's name when you go to the room , otherwise you would have error when you change the map.
 
-#extension
+# extension
 drop verb:
 use re.match(r'^\s*drop(\s*|\s+\w*)',user_input,re.IGNORECASE) to find the drop input
 delete the drop and get the item by using re.sub(r"^\s*drop\s+","",user_input.rstrip(),re.IGNORECASE).
