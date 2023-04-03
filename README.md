@@ -10,7 +10,7 @@ https://github.com/JJthomps-prog/project.git
 # test
 First I test my code with several maps and all good. Then I use my own map. With differnet directions and different items. I verify that items are correctly placed in each room and that they can be interacted with as expected. Test for scenarios in which an item is essential to completing a puzzle or progressing through the game. I check that each room has the appropriate exits leading to other rooms in the game world. Ensure that the exits are clearly labeled and that they lead to the intended destination.
 My map is like:
-https://github.com/JJthomps-prog/project/1.png
+https://github.com/JJthomps-prog/project/blob/f40b04c2ac44707be7fcc307d44a19270db6a2d0/1.png
 
 
 The intention of the game is to get the keys before you go door5(Exit).
