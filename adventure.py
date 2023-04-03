@@ -50,7 +50,7 @@ index = 0
 inventory = []
 door3lock = 0
 Roommatekey = 0
-# go大小写还未区分，get只能一次捡一个东西
+
 while True:
     try:
         user_input = input("What would you like to do? ")
