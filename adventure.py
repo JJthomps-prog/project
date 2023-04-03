@@ -49,6 +49,7 @@ print(f"> {data[0]['name']}\n\n{data[0]['desc']}\n\nExits: {' '.join(list(data[0
 index = 0
 inventory = []
 door3lock = 0
+Roommatekey = 0
 # go大小写还未区分，get只能一次捡一个东西
 while True:
     try:
@@ -57,15 +58,15 @@ while True:
             print('Goodbye!')
             break
 
-        elif re.match(r'^\s*go\s+door3',user_input,re.IGNORECASE):
+        elif (data[index]['name'] == "Rocky's Living room" or data[index]['name'] == "Rocky's Roommate room") and re.match(r'^\s*go\s+door3',user_input,re.IGNORECASE) and Roommatekey == 0:
             if 'beer' not in inventory and 'weed' not in inventory and door3lock == 0:
-                print(f"'Bring me my bear and weed. I won't open the door if you don't have these two things.' A hoarse voice came, accompanied by the sound of a lighter lighting a cigarette.")
+                print(f"'Bring me my bear and weed. I won't open the door if you don't have these two things.' A hoarse voice came, accompanied by the sound of a lighter lighting a cigarette.\n")
             elif 'beer' in inventory and 'weed' not in inventory and door3lock == 0:
-                print(f"'Where's my weed. I need weed right now.' A sound came.")
+                print(f"'Where's my weed. I need weed right now.' A sound came.\n")
             elif 'beer' not in inventory and 'weed' in inventory and door3lock == 0:
-                print(f"'Where's my beer! You know I need my beer to stay sober.'A sound came.")
+                print(f"'Where's my beer! You know I need my beer to stay sober.'A sound came.\n")
             elif 'beer' in inventory and 'weed' in inventory and door3lock == 0:
-                print(f"'Come on in my friend! I've been waiting you for a long time.' Roommate opened the door with a simle.")
+                print(f"'Come on in my friend! I've been waiting you for a long time. Just drop it in the room.' Roommate opened the door with a simle.\n")
                 index = data[index]['exits']['door3']
                 print(f"You go door3.\n")
                 if 'items' not in data[index].keys() or len(data[index]['items'])==0:
@@ -80,6 +81,32 @@ while True:
                 else:
                     print(f"> {data[index]['name']}\n\n{data[index]['desc']}\n\nItems: {', '.join(data[index]['items']).lower()}\n\nExits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
 
+        elif data[index]['name'] == "Rocky's Roommate room" and re.match(r'^\s*go\s+door4',user_input,re.IGNORECASE) and Roommatekey == 0:
+            if 'weed' in data[index]['items'] and 'beer' in data[index]['items']:
+                index = data[index]['exits']['door4']
+                print(f"'The keys are in the box. 'open box'.' Roommate shouts to you.\n")
+                print(f"You go door4.\n")
+                if 'box' not in data[4]['items']:
+                    data[4]['items'].append('box')
+                if 'items' not in data[index].keys() or len(data[index]['items'])==0:
+                    print(f"> {data[index]['name']}\n\n{data[index]['desc']}\n\nExits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
+                else:
+                    print(f"> {data[index]['name']}\n\n{data[index]['desc']}\n\nItems: {', '.join(data[index]['items']).lower()}\n\nExits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
+            else:
+                print(f"Rocky's roommate shouts 'the key is in the bathroom, I won't tell you where unless you drop 'weed' and 'beer' in my room.\n")
+                index = data[index]['exits']['door4']
+                print(f"You go door4.\n")
+                if 'items' not in data[index].keys() or len(data[index]['items'])==0:
+                    print(f"> {data[index]['name']}\n\n{data[index]['desc']}\n\nExits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
+                else:
+                    print(f"> {data[index]['name']}\n\n{data[index]['desc']}\n\nItems: {', '.join(data[index]['items']).lower()}\n\nExits: {' '.join(list(data[index]['exits'].keys())).lower()}\n")
+
+        elif data[index]['name'] == "Rocky's Roommate bathroom" and re.match(r'^\s*open\s+box',user_input,re.IGNORECASE) and 'box' in data[4]['items'] and Roommatekey == 0:
+            inventory.append('Roommate keys')
+            data[4]['items'].remove('box')
+            print("You finally get the keys!\n")
+            Roommatekey = 1
+        
         elif re.match(r'^\s*go(\s*|\s+\w*)',user_input,re.IGNORECASE):
             match = re.search(r'\s*go\s+(\S+)',user_input,re.IGNORECASE)
             if match:
