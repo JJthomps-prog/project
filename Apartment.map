@@ -1,0 +1,35 @@
+[
+ {"name": "Rocky's room", 
+  "desc": "You are in a simple room with white walls. You lose your keys yesterday. You need to borrow your Roommate's keys. Although you already told him last night.",
+  "exits": { "door1": 1, "door2": 2 }
+ }
+,
+ {"name": "Rocky's bathroom", 
+  "desc": "This room is clean and cozy, with blue walls and lots of plants",
+  "exits": { "door1": 0 }
+ }
+,
+ {"name": "Rocky's Living room", 
+  "desc": "You are in the living room, with trash everywhere.",
+  "exits": { "door2": 0, "door3": 3, "door5": 5 },
+  "items": ["beer","weed"]
+ }
+,
+ {"name": "Rocky's Roommate room",
+  "desc": "This room is fancy. But it smells bad!",
+  "exits": { "door3": 2, "door4": 4 },
+  "items": []
+ }
+ ,
+ {"name": "Rocky's Roommate bathroom",
+  "desc": "This room is a mess.",
+  "exits": { "door4": 3 },
+  "items": []
+ }
+ ,
+ {"name": "Rocky's Apartment Exit",
+  "desc": "This is the exit.",
+  "exits": { "door5": 2},
+  "items": []
+ }
+]
